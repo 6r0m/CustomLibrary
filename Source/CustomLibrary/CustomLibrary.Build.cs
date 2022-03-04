@@ -38,6 +38,7 @@ public class CustomLibrary : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"EngineSettings",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
