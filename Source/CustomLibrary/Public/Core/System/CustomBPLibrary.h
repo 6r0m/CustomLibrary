@@ -1,9 +1,9 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// 6r0m, MIT liscence
 
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "CustomLibraryBPLibrary.generated.h"
+#include "CustomBPLibrary.generated.h"
 
 /* 
 *	Function library class.
@@ -18,15 +18,36 @@
 *	Keywords -	the list of keywords that helps you to find node when you search for it using Blueprint drop-down menu. 
 *				Good example is "Print String" node which you can find also by using keyword "log".
 *	Category -	the category your node will be under in the Blueprint drop-down menu.
-*
-*	For more info on custom blueprint nodes visit documentation:
-*	https://wiki.unrealengine.com/Custom_Blueprint_Node_Creation
 */
 UCLASS()
-class UCustomLibraryBPLibrary : public UBlueprintFunctionLibrary
+class UCustomBPLibrary : public UBlueprintFunctionLibrary
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "CustomLibrary sample test testing"), Category = "CustomLibraryTesting")
-	static float CustomLibrarySampleFunction(float Param);
+public:
+
+	//~ Begin Math
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Math")
+	static const FVector RayPlaneIntersection(const FVector& RayOrigin, const FVector& RayDirection, const FPlane& Plane);
+	//~ End Math
+
+	//~ Begin Physx
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Physx")
+	static const FVector GetLockedAxis(const UPrimitiveComponent* PrimitiveComponent);
+	//~ End Physx
+
+	//~ Begin Utilities
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities", meta = (Keywords = "Cmd, Command Line, Parser"))
+	static const bool GetCmdParameter(const FString& InKey, FString& OutValue);
+	//~ End Utilities
+
+	//~ Begin Settings
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CustomBFLibrary|Settings")
+	static const FString GetProjectVersion();
+	//~ End Settings
+
+	//~ Begin Debug
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Debug")
+	static void CustomLog(const FString& LogText);
+	//~ End Debug
 };
