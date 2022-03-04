@@ -19,12 +19,20 @@
 *				Good example is "Print String" node which you can find also by using keyword "log".
 *	Category -	the category your node will be under in the Blueprint drop-down menu.
 */
+
+DECLARE_LOG_CATEGORY_EXTERN(LogCustomBPLibrary, Log, All);
+
 UCLASS()
 class UCustomBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 
 public:
+
+	//~ Begin Debug
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Debug")
+		static void CustomLog(const FString& LogText);
+	//~ End Debug
 
 	//~ Begin Math
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Math")
@@ -36,18 +44,23 @@ public:
 	static const FVector GetLockedAxis(const UPrimitiveComponent* PrimitiveComponent);
 	//~ End Physx
 
-	//~ Begin Utilities
-	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities", meta = (Keywords = "Cmd, Command Line, Parser"))
-	static const bool GetCmdParameter(const FString& InKey, FString& OutValue);
-	//~ End Utilities
+	//~ Begin Rendering
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Rendering", meta = (WorldContext = "_WorldContextObject", 
+		ToolTip = "Check if some actor is in frustrum"))
+	static const bool IsActorInFrustrum(const UObject* _WorldContextObject, const AActor* _Actor, FVector& OutViewLocation, FRotator& OutViewRotation);
+	//~ End Rendering
 
 	//~ Begin Settings
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CustomBFLibrary|Settings")
 	static const FString GetProjectVersion();
 	//~ End Settings
 
-	//~ Begin Debug
-	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Debug")
-	static void CustomLog(const FString& LogText);
-	//~ End Debug
+	//~ Begin Utilities
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities", meta = (Keywords = "Cmd, Command Line, Parser"))
+	static const bool GetCmdParameter(const FString& InKey, FString& OutValue);
+
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Utilities", Meta = (DisplayName = "Regex Replace",
+		ToolTip = "Regex Replace from a pattern with default pattern for HTML tags. Leave Replacement empty if you need just delete finded strings by pattern."))
+	static const FString RegexReplace(const FString& InString, const FString& Replacement, const FString& Pattern = "<[^>]*>");
+	//~ End Utilities
 };
