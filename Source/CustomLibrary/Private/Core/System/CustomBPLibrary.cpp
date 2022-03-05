@@ -7,6 +7,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+#include "IXRTrackingSystem.h"
+
 #include "EngineSettings/Classes/GeneralProjectSettings.h"
 
 DEFINE_LOG_CATEGORY(LogCustomBPLibrary);
@@ -16,9 +18,9 @@ void UCustomBPLibrary::CustomLog(const FString& LogText)
 	UE_LOG(LogTemp, Display, TEXT("%s"), *LogText);
 }
 
-int32 UCustomBPLibrary::RandomWeightIndex(const TArray<int32>& WeightsArray)
+const int32 UCustomBPLibrary::RandomWeightIndex(const TArray<int32>& WeightsArray)
 {
-	int32 SumWeights = Algo::Accumulate(WeightsArray, 0);
+	const int32 SumWeights = Algo::Accumulate(WeightsArray, 0);
 
 	int32 RandomWeight = UKismetMathLibrary::RandomIntegerInRange(0, SumWeights);
 		
@@ -150,4 +152,21 @@ const FString UCustomBPLibrary::RegexReplace(const FString& InString, const FStr
 	}
 
 	return Result;
+}
+
+void UCustomBPLibrary::GetHMDViewOffset(const bool RightEye, const float WorldToMeters, FVector& OutViewLocation, FRotator& OutViewRotation)
+{
+	if (GEngine && GEngine->XRSystem.IsValid())
+	{
+		GEngine->XRSystem->GetStereoRenderingDevice()->CalculateStereoViewOffset(
+			RightEye ? EStereoscopicPass::eSSP_RIGHT_EYE : EStereoscopicPass::eSSP_LEFT_EYE, OutViewRotation, WorldToMeters, OutViewLocation);
+	}
+}
+
+void UCustomBPLibrary::GetHMDProjectionMatix(const bool RightEye, FMatrix& Matrix)
+{
+	if (GEngine && GEngine->XRSystem.IsValid())
+	{
+		Matrix = GEngine->XRSystem->GetStereoRenderingDevice()->GetStereoProjectionMatrix(RightEye ? EStereoscopicPass::eSSP_RIGHT_EYE : EStereoscopicPass::eSSP_LEFT_EYE);
+	}
 }

@@ -35,9 +35,9 @@ public:
 	//~ End Debug
 
 	//~ Begin Math
-	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Math", Meta = (ToolTip = "Find Random Index with given Weights Array. \
-		Useful to give greater probability to certain indexes."))
-	static int32 RandomWeightIndex(const TArray<int32>& WeightsArray);
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Math", Meta = (ToolTip = 
+		"Find Random Index with given Weights Array. Useful to give greater probability to certain indexes."))
+	static const int32 RandomWeightIndex(const TArray<int32>& WeightsArray);
 	
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Math")
 	static const FVector RayPlaneIntersection(const FVector& RayOrigin, const FVector& RayDirection, const FPlane& Plane);
@@ -55,7 +55,7 @@ public:
 	//~ End Rendering
 
 	//~ Begin Settings
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CustomBFLibrary|Settings")
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Settings")
 	static const FString GetProjectVersion();
 	//~ End Settings
 
@@ -67,4 +67,12 @@ public:
 		ToolTip = "Regex Replace from a pattern with default pattern for HTML tags. Leave Replacement empty if you need just delete finded strings by pattern."))
 	static const FString RegexReplace(const FString& InString, const FString& Replacement, const FString& Pattern = "<[^>]*>");
 	//~ End Utilities
+
+	//~ Begin XR
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|XR")
+	static void GetHMDViewOffset(const bool RightEye, const float WorldToMeters, FVector& OutViewLocation, FRotator& OutViewRotation);
+	
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|XR")
+	static void GetHMDProjectionMatix(const bool RightEye, FMatrix& Matrix);
+	//~ End XR
 };
