@@ -1,9 +1,12 @@
 // 6r0m, MIT liscence
 
-
 #include "Core/System/CustomBPLibrary.h"
+
+#include "Algo/Accumulate.h"
 #include "Math/Plane.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+
 #include "EngineSettings/Classes/GeneralProjectSettings.h"
 
 DEFINE_LOG_CATEGORY(LogCustomBPLibrary);
@@ -11,6 +14,33 @@ DEFINE_LOG_CATEGORY(LogCustomBPLibrary);
 void UCustomBPLibrary::CustomLog(const FString& LogText)
 {
 	UE_LOG(LogTemp, Display, TEXT("%s"), *LogText);
+}
+
+int32 UCustomBPLibrary::RandomWeightIndex(const TArray<int32>& WeightsArray)
+{
+	int32 SumWeights = Algo::Accumulate(WeightsArray, 0);
+
+	int32 RandomWeight = UKismetMathLibrary::RandomIntegerInRange(0, SumWeights);
+		
+	for (int32 i = 0; i < WeightsArray.Num(); i++)
+	{
+		// Pick the First Greatest Weight than Random Weight
+		if (WeightsArray[i] >= RandomWeight) 
+		{
+			return i;
+		}
+		else
+		{
+			RandomWeight -= WeightsArray[i];
+		}		
+	}
+
+	// we should never be here
+	UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- can't find any Weights greater than Random. SumWeights: %d , RandomWeight: %d"),
+		*FString(__FUNCTION__), SumWeights, RandomWeight);
+	ensure(false);
+
+	return 0;
 }
 
 const FVector UCustomBPLibrary::RayPlaneIntersection(const FVector& RayOrigin, const FVector& RayDirection, const FPlane& Plane)

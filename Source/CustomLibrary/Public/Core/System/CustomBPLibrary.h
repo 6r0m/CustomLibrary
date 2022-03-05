@@ -31,10 +31,14 @@ public:
 
 	//~ Begin Debug
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Debug")
-		static void CustomLog(const FString& LogText);
+	static void CustomLog(const FString& LogText);
 	//~ End Debug
 
 	//~ Begin Math
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Math", Meta = (ToolTip = "Find Random Index with given Weights Array. \
+		Useful to give greater probability to certain indexes."))
+	static int32 RandomWeightIndex(const TArray<int32>& WeightsArray);
+	
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Math")
 	static const FVector RayPlaneIntersection(const FVector& RayOrigin, const FVector& RayDirection, const FPlane& Plane);
 	//~ End Math
