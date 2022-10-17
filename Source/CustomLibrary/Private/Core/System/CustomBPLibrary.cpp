@@ -18,6 +18,18 @@ void UCustomBPLibrary::CustomLog(const FString& LogText)
 	UE_LOG(LogTemp, Display, TEXT("%s"), *LogText);
 }
 
+bool UCustomBPLibrary::IsBitFlagsContains(const uint8& BaseFlags, const uint8& CheckFlags, const bool bFullMatch /*= false*/)
+{
+	if (bFullMatch) 
+	{
+		return ((CheckFlags ^ BaseFlags) == 0);
+	}
+	else
+	{
+		return ((CheckFlags | BaseFlags) == BaseFlags);
+	}
+}
+
 const int32 UCustomBPLibrary::RandomWeightIndex(const TArray<int32>& WeightsArray)
 {
 	const int32 SumWeights = Algo::Accumulate(WeightsArray, 0);
@@ -38,7 +50,7 @@ const int32 UCustomBPLibrary::RandomWeightIndex(const TArray<int32>& WeightsArra
 	}
 
 	// we should never be here
-	UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- can't find any Weights greater than Random. SumWeights: %d , RandomWeight: %d"),
+	UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- can't find any Weights greater than Random! SumWeights: %d , RandomWeight: %d"),
 		*FString(__FUNCTION__), SumWeights, RandomWeight);
 	ensure(false);
 
@@ -66,7 +78,7 @@ const bool UCustomBPLibrary::IsActorInFrustrum(const UObject* _WorldContextObjec
 {
 	if (!_WorldContextObject)
 	{
-		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- WorldContextObject isn't valid"), *FString(__FUNCTION__));
+		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- WorldContextObject isn't valid!"), *FString(__FUNCTION__));
 		return false;
 	}
 
@@ -76,7 +88,7 @@ const bool UCustomBPLibrary::IsActorInFrustrum(const UObject* _WorldContextObjec
 	const bool bPlayerViewportValid = LocalPlayer != nullptr && LocalPlayer->ViewportClient != nullptr && LocalPlayer->ViewportClient->Viewport;	
 	if (!bPlayerViewportValid)
 	{
-		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- PlayerViewport isn't valid"), *FString(__FUNCTION__));
+		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- PlayerViewport isn't valid!"), *FString(__FUNCTION__));
 		return false;
 	}
 
@@ -86,7 +98,7 @@ const bool UCustomBPLibrary::IsActorInFrustrum(const UObject* _WorldContextObjec
 	const FSceneView* SceneView = LocalPlayer->CalcSceneView(&SceneViewFamilyContext, OutViewLocation, OutViewRotation, LocalPlayer->ViewportClient->Viewport);
 	if (SceneView == nullptr) 
 	{
-		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- SceneView isn't valid"), *FString(__FUNCTION__));
+		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- SceneView isn't valid!"), *FString(__FUNCTION__));
 		return false;
 	}
 	
@@ -97,6 +109,56 @@ const FString UCustomBPLibrary::GetProjectVersion()
 {
 	const UGeneralProjectSettings& ProjectSettings = *GetDefault<UGeneralProjectSettings>();
 	return *ProjectSettings.ProjectVersion;
+}
+
+UClass* UCustomBPLibrary::FindClass(const FString& InClassName)
+{
+	const TCHAR* ClassName = *InClassName;
+	check(ClassName);
+
+	UObject* ClassPackage = ANY_PACKAGE;
+
+	if (UClass* Result = FindObject<UClass>(ClassPackage, ClassName))
+	{
+		return Result;
+	}
+
+	if (UObjectRedirector* ObjectRedirector = FindObject<UObjectRedirector>(ClassPackage, ClassName))
+	{
+		return CastChecked<UClass>(ObjectRedirector->DestinationObject);
+	}
+
+	return nullptr;
+}
+
+void UCustomBPLibrary::GetActorLevel(const AActor* Actor, TSoftObjectPtr<UWorld>& OutLevel)
+{
+	OutLevel = Actor->GetLevel();
+}
+
+bool UCustomBPLibrary::GetAllActorsAtLevel(const UWorld* World, TArray<AActor*>& OutActors)
+{
+	OutActors.Empty();
+
+	if (World == nullptr)
+	{
+		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- World isn't valid!"), *FString(__FUNCTION__));
+		return false;
+	}
+
+	const ULevel* Level = World->GetCurrentLevel();
+	if (Level == nullptr)
+	{
+		UE_LOG(LogCustomBPLibrary, Error, TEXT("%s -- Level isn't valid!"), *FString(__FUNCTION__));
+		return false;
+	}
+
+	for (AActor* Actor : Level->Actors)
+	{
+		OutActors.Add(Actor);
+	}
+
+	return (OutActors.Num() > 0);
 }
 
 const bool UCustomBPLibrary::GetCmdParameter(const FString& InKey, FString& OutValue)

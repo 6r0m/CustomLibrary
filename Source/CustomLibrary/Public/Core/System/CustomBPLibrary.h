@@ -34,7 +34,11 @@ public:
 	static void CustomLog(const FString& LogText);
 	//~ End Debug
 
+
 	//~ Begin Math
+	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Math")
+	static bool IsBitFlagsContains(const uint8& BaseFlags, const uint8& CheckFlags, const bool bFullMatch = false);
+	
 	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Math", Meta = (ToolTip = 
 		"Find Random Index with given Weights Array. Useful to give greater probability to certain indexes."))
 	static const int32 RandomWeightIndex(const TArray<int32>& WeightsArray);
@@ -43,10 +47,12 @@ public:
 	static const FVector RayPlaneIntersection(const FVector& RayOrigin, const FVector& RayDirection, const FPlane& Plane);
 	//~ End Math
 
+
 	//~ Begin Physx
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Physx")
 	static const FVector GetLockedAxis(const UPrimitiveComponent* PrimitiveComponent);
 	//~ End Physx
+
 
 	//~ Begin Rendering
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Rendering", meta = (WorldContext = "_WorldContextObject", 
@@ -54,12 +60,23 @@ public:
 	static const bool IsActorInFrustrum(const UObject* _WorldContextObject, const AActor* _Actor, FVector& OutViewLocation, FRotator& OutViewRotation);
 	//~ End Rendering
 
+
 	//~ Begin Settings
 	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|Settings")
 	static const FString GetProjectVersion();
 	//~ End Settings
 
+
 	//~ Begin Utilities
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities")
+	static UClass* FindClass(const FString& InClassName);
+	
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities")
+	static void GetActorLevel(const AActor* Actor, TSoftObjectPtr<UWorld>& OutLevel);
+	
+	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities")
+	static bool GetAllActorsAtLevel(const UWorld* World, TArray<AActor*>& OutActors);
+	
 	UFUNCTION(BlueprintCallable, Category = "CustomBFLibrary|Utilities", meta = (Keywords = "Cmd, Command Line, Parser"))
 	static const bool GetCmdParameter(const FString& InKey, FString& OutValue);
 
@@ -67,6 +84,7 @@ public:
 		ToolTip = "Regex Replace from a pattern with default pattern for HTML tags. Leave Replacement empty if you need just delete finded strings by pattern."))
 	static const FString RegexReplace(const FString& InString, const FString& Replacement, const FString& Pattern = "<[^>]*>");
 	//~ End Utilities
+
 
 	//~ Begin XR
 	UFUNCTION(BlueprintPure, Category = "CustomBFLibrary|XR")
