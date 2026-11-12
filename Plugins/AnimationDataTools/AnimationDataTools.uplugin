@@ -1,0 +1,29 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Animation Data Tools",
+	"Description": "Maps named float channels and bone rotation deltas onto a skeleton's curves and bones through ordered, data-driven rules, and writes the result as an animation sequence in the editor.",
+	"Category": "Animation",
+	"CreatedBy": "6r0m",
+	"CreatedByURL": "https://github.com/6r0m",
+	"DocsURL": "https://github.com/6r0m/CustomLibrary/tree/develop/Plugins/AnimationDataTools",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/6r0m/CustomLibrary/issues",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AnimationDataTools",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "AnimationDataToolsEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

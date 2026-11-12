@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Text Processing",
+	"Description": "Incremental text fragmentation and validated regex replacement for text that arrives in pieces.",
+	"Category": "Text",
+	"CreatedBy": "6r0m",
+	"CreatedByURL": "https://github.com/6r0m",
+	"DocsURL": "https://github.com/6r0m/CustomLibrary/tree/develop/Plugins/TextProcessing",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/6r0m/CustomLibrary/issues",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "TextProcessing",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

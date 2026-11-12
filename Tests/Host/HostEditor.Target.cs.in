@@ -1,0 +1,13 @@
+using UnrealBuildTool;
+
+// Editor target of a generated verification host. Tests/run.py fills in the test modules.
+public class HostEditorTarget : TargetRules
+{
+	public HostEditorTarget(TargetInfo Target) : base(Target)
+	{
+		Type = TargetType.Editor;
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+		ExtraModuleNames.AddRange(new string[] { @MODULES@ });
+	}
+}
