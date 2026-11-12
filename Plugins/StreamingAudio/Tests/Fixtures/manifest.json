@@ -1,0 +1,144 @@
+{
+  "audio": {
+    "layer2_stereo_44k.mp2": {
+      "bitrates_kbps": [
+        192
+      ],
+      "bytes": 24450,
+      "channels": 2,
+      "frames": 39,
+      "layer": 2,
+      "mpeg_version": "1",
+      "sample_rate": 44100,
+      "samples_per_frame": 1152,
+      "vbr": false
+    },
+    "mpeg1_cbr_mono_44k.mp3": {
+      "bitrates_kbps": [
+        64
+      ],
+      "bytes": 8359,
+      "channels": 1,
+      "frames": 40,
+      "layer": 3,
+      "mpeg_version": "1",
+      "sample_rate": 44100,
+      "samples_per_frame": 1152,
+      "vbr": false
+    },
+    "mpeg1_cbr_stereo_44k.mp3": {
+      "bitrates_kbps": [
+        128
+      ],
+      "bytes": 32600,
+      "channels": 2,
+      "frames": 78,
+      "layer": 3,
+      "mpeg_version": "1",
+      "sample_rate": 44100,
+      "samples_per_frame": 1152,
+      "vbr": false
+    },
+    "mpeg1_cbr_stereo_44k_corrupt.mp3": {
+      "bitrates_kbps": [
+        128
+      ],
+      "bytes": 32600,
+      "channels": 2,
+      "corrupted_bytes": [
+        16300,
+        418
+      ],
+      "corrupted_frame": 39,
+      "frames": 78,
+      "layer": 3,
+      "mpeg_version": "1",
+      "sample_rate": 44100,
+      "samples_per_frame": 1152,
+      "vbr": false
+    },
+    "mpeg1_vbr_stereo_44k.mp3": {
+      "bitrates_kbps": [
+        32,
+        40,
+        48,
+        56,
+        96,
+        112,
+        224,
+        320
+      ],
+      "bytes": 10981,
+      "channels": 2,
+      "frames": 78,
+      "layer": 3,
+      "mpeg_version": "1",
+      "sample_rate": 44100,
+      "samples_per_frame": 1152,
+      "vbr": true
+    },
+    "mpeg25_cbr_mono_8k.mp3": {
+      "bitrates_kbps": [
+        16
+      ],
+      "bytes": 2304,
+      "channels": 1,
+      "frames": 16,
+      "layer": 3,
+      "mpeg_version": "2.5",
+      "sample_rate": 8000,
+      "samples_per_frame": 576,
+      "vbr": false
+    },
+    "mpeg2_cbr_mono_22k.mp3": {
+      "bitrates_kbps": [
+        32
+      ],
+      "bytes": 4284,
+      "channels": 1,
+      "frames": 41,
+      "layer": 3,
+      "mpeg_version": "2",
+      "sample_rate": 22050,
+      "samples_per_frame": 576,
+      "vbr": false
+    }
+  },
+  "parser": {
+    "free_format_header.bin": {
+      "bitrate_kbps": 0,
+      "bytes": 420,
+      "header_hex": "fffb00c0",
+      "label": "header bytes only, not an audio stream",
+      "layer": 3
+    },
+    "layer1_header.bin": {
+      "bitrate_kbps": 384,
+      "bytes": 416,
+      "header_hex": "ffffc0c0",
+      "label": "header bytes only, not an audio stream",
+      "layer": 1
+    }
+  },
+  "wave": {
+    "pcm16_extensible_stereo_44k.wav": {
+      "bits_per_sample": 16,
+      "channels": 2,
+      "extensible": true,
+      "frames": 100,
+      "sample_rate": 44100
+    },
+    "pcm16_mono_16k.wav": {
+      "bits_per_sample": 16,
+      "channels": 1,
+      "frames": 8000,
+      "sample_rate": 16000
+    },
+    "pcm24_stereo_44k.wav": {
+      "bits_per_sample": 24,
+      "channels": 2,
+      "frames": 11025,
+      "sample_rate": 44100
+    }
+  }
+}

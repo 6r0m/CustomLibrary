@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Unreal Utilities",
+	"Description": "Validated Blueprint functions for small capabilities the engine does not expose to Blueprint: weighted index selection, an approximate view-frustum test, a component's locked physics axis and the project version.",
+	"Category": "Scripting",
+	"CreatedBy": "6r0m",
+	"CreatedByURL": "https://github.com/6r0m",
+	"DocsURL": "https://github.com/6r0m/CustomLibrary/tree/develop/Plugins/UnrealUtilities",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/6r0m/CustomLibrary/issues",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "UnrealUtilities",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

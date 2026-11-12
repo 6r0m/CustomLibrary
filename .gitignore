@@ -72,3 +72,10 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Verification runner output (stages, packages, generated hosts, reports)
+tmp/
+
+# Python bytecode
+__pycache__/
+*.py[cod]

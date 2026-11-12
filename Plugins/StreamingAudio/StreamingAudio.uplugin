@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Streaming Audio",
+	"Description": "Plays 16-bit PCM that arrives in pieces through a procedural sound wave, decodes streamed MP3 (Layer 3) into that PCM, and reads, writes and chunks 16-bit WAV data.",
+	"Category": "Audio",
+	"CreatedBy": "6r0m",
+	"CreatedByURL": "https://github.com/6r0m",
+	"DocsURL": "https://github.com/6r0m/CustomLibrary/tree/develop/Plugins/StreamingAudio",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/6r0m/CustomLibrary/issues",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "StreamingAudio",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
