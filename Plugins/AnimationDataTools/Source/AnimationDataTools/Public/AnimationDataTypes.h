@@ -3,7 +3,11 @@
 #include "CoreMinimal.h"
 #include "AnimationDataTypes.generated.h"
 
-/** Result of a channel-animation operation. Nothing is created or changed unless the result is Ok. */
+/**
+ * Result of an animation-data operation. Every result except Ok and SaveFailed is returned before
+ * any object is created. SaveFailed comes only from FAnimationDataSequenceWriter::WriteAsset, after
+ * the asset was created; that function states what may remain on disk.
+ */
 UENUM(BlueprintType)
 enum class EAnimationDataResult : uint8
 {

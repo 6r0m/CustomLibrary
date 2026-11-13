@@ -3,7 +3,7 @@
 ## Purpose
 
 Prove each plugin works the way a project would use it — packaged, installed alone, consumed through
-public headers and Blueprint nodes — and that the repository's rules hold.
+public headers and Blueprint nodes — and run guards for repository rules a compiler cannot see.
 
 ## Owns
 

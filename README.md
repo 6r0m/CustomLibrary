@@ -9,8 +9,9 @@ and validated engine utilities, with C++ and Blueprint entry points.
 | how the plugin set is organised and the rules every plugin follows | [docs/README.md](docs/README.md) |
 | building and testing every plugin | [Tests/README.md](Tests/README.md) |
 
-**Tested support:** Unreal Engine 5.8.3, Win64 editor and game targets. Other engine versions and
-platforms have not been built or tested.
+**Tested support:** Unreal Engine 5.8.3 on Win64. Each plugin is built for the editor and game
+targets; its tests run in the editor, not in a packaged game. Other engine versions and platforms
+have not been built or tested.
 
 **Install a plugin:** copy its folder from `Plugins/` into your project's `Plugins/` folder (or
 into the engine's `Plugins/Marketplace/`) and enable it. Each plugin works without the others.

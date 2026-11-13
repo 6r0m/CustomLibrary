@@ -1,8 +1,9 @@
 # TextProcessing
 
 Splits text that arrives in pieces — a streamed reply, a live transcript — into delimiter-terminated
-fragments as soon as each one is complete, emitting every fragment exactly once and in order.
-It also provides validated regular-expression replacement with literal replacement text.
+fragments as soon as each one is known to be complete, emitting every fragment exactly once and in
+order; `Flush` returns the text that remains when the stream ends. It also provides validated
+regular-expression replacement with literal replacement text.
 
 | concern | owner |
 |---|---|

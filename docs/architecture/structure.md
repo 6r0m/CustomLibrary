@@ -28,7 +28,7 @@ fragments, plus a few Blueprint helpers that fill gaps in the engine's Blueprint
 | StreamingAudio | plays PCM that arrives in pieces, decodes streamed MP3, reads, writes and chunks WAV | [StreamingAudio architecture](../../Plugins/StreamingAudio/docs/architecture/README.md) |
 | TextProcessing | splits text that arrives in pieces into delimiter-terminated fragments, and validates regex replacement | [TextProcessing architecture](../../Plugins/TextProcessing/docs/architecture/README.md) |
 | UnrealUtilities | validated weighted selection, collision-sphere view test, locked-axis query and project version | [UnrealUtilities architecture](../../Plugins/UnrealUtilities/docs/architecture/README.md) |
-| Tests | stages, packages, installs and tests each plugin alone, and checks the rules below | [verification architecture](../../Tests/docs/architecture/README.md) |
+| Tests | stages, packages, installs and tests each plugin alone, and runs guards for repository rules a compiler cannot see | [verification architecture](../../Tests/docs/architecture/README.md) |
 
 ## Relationships
 
@@ -80,9 +80,9 @@ copied into every plugin drifts.
 
 ## Risks and technical debt
 
-- **One tested engine and platform.** Only UE 5.8.3 on Win64 is built and tested; other versions
-  may fail to compile. Mitigation: run the verification route on each engine before claiming it in
-  the root `README.md`.
+- **One tested engine and platform.** Only the engine version and platform stated in the root
+  `README.md` are built and tested; other versions may fail to compile. Mitigation: run the
+  verification route on each engine before claiming it there.
 - **No packaged-build animation generation.** Sequences are written only in the editor; a packaged
   game cannot create one from channel data at runtime. The engine has no supported runtime API for
   installing compressed animation data. Mitigation, if ever needed: a runtime writer proven by a
